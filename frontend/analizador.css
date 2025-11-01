@@ -1,0 +1,511 @@
+/* --- --- --- --- --- --- --- ---
+   ARCHIVO: style_analizador.css (Diseño FINAL - Ajuste de Margenes, Colores y Layout)
+   --- --- --- --- --- --- --- --- */
+
+/* Importar la fuente personalizada y fuentes de apoyo */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --color-primary: #d300ff;
+    /* Púrpura Neón */
+    --color-understated: #6a5acd;
+    /* ¡NUEVO! Púrpura más sutil, como el nuevo "cian" */
+    --color-success: #00ff99;
+    /* Verde Neón */
+    --color-warning: #ff8c00;
+    /* Naranja Neón */
+    --color-bg-dark: #0d0d0d;
+    --color-panel-bg: rgba(26, 26, 26, 0.95);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--color-bg-dark);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding-bottom: 50px;
+    position: relative;
+    overflow-x: hidden;
+    /* Evita scroll horizontal por animaciones */
+}
+
+/* --- FONDO ANIMADO (Mantenido) --- */
+@keyframes backgroundPulse {
+    from {
+        filter: brightness(0.95);
+        transform: scale(1.0);
+    }
+
+    to {
+        filter: brightness(1.1);
+        transform: scale(1.05);
+    }
+}
+
+.background-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: backgroundPulse 15s infinite alternate ease-in-out;
+    opacity: 0.5;
+}
+
+/* --- CABECERA MODERNA (NAV) --- */
+.header-bar {
+    background: linear-gradient(180deg, #d300ff, #8f00ff);
+    padding: 15px 30px;
+    /* Reducido para que todo quepa */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 10;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Espacio entre logo y título */
+}
+
+.logo {
+    /* Estilo para tu futuro logo */
+    height: 40px;
+    width: auto;
+}
+
+.main-title {
+    color: #ffffff;
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.return-button {
+    font-family: 'Rajdhani', sans-serif;
+    color: black;
+    background-color: white;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 8px 15px;
+    border: 1px solid var(--color-understated);
+    border-radius: 5px;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px rgba(106, 90, 205, 0.3);
+    /* Sombra de texto del nuevo color */
+}
+
+.return-button:hover {
+    color: var(--color-bg-dark);
+    background-color: var(--color-understated);
+    box-shadow: 0 0 15px var(--color-understated);
+    transform: translateY(-2px);
+}
+
+#chatbot-panel {
+    width: 100%;
+}
+
+
+/* --- LAYOUT Y PANELES (AJUSTADOS Y GRANDES) --- */
+.container {
+    max-width: 1300px;
+    /* Un poco menos ancho para que quepa todo */
+    margin: 40px auto;
+    padding: 0 20px;
+    /* Menos padding lateral */
+    position: relative;
+    z-index: 5;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    /* Ajuste para que el chat sea un poco más grande */
+    gap: 30px;
+    /* Menos espacio entre paneles para que quepan */
+}
+
+/* Efecto de transparencia en los paneles (cards) */
+.panel {
+    border-radius: 15px;
+    padding: 30px;
+    /* Padding ajustado */
+    box-shadow: 0 0 25px rgba(211, 0, 255, 0.25);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+}
+
+
+
+.panel-header {
+    margin-bottom: 20px;
+}
+
+/* Menos margen */
+h2 {
+    color: var(--color-understated);
+    /* Títulos en el nuevo color */
+    font-size: 2rem;
+    /* Títulos un poco más pequeños */
+    font-weight: 700;
+    border-bottom: 2px solid #333;
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 8px rgba(106, 90, 205, 0.4);
+}
+
+.guide-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #b0b0b0;
+}
+
+
+/* --- PANEL IZQUIERDO: Interacción y Botones Neón --- */
+#preview-area {
+    width: 100%;
+    height: 350px;
+    /* Área de previsualización ajustada */
+    border: 3px dashed var(--color-primary);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    /* Margen ajustado */
+    overflow: hidden;
+}
+
+#preview-placeholder {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+#current-image,
+#webcam-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* La imagen se adapta manteniendo proporción */
+    object-position: center;
+    /* Centra la imagen si hay espacio */
+}
+
+/* Botones de Acción (Cámara, Subir, Pegar) */
+.interaction-buttons {
+    display: flex;
+    gap: 10px;
+    /* Menos espacio entre botones */
+    margin-bottom: 20px;
+    /* Margen ajustado */
+    justify-content: center;
+
+}
+
+.action-btn {
+    font-size: 0.9rem;
+    /* Texto de botón más pequeño */
+    padding: 10px 8px;
+    /* Padding ajustado */
+}
+
+#camera-button {
+    background-color: var(--color-warning);
+    color: var(--color-bg-dark);
+}
+
+#paste-button {
+    background-color: var(--color-success);
+    color: var(--color-bg-dark);
+}
+
+.upload-label {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/* Efectos hover para botones de acción */
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Menos efecto */
+#camera-button:hover {
+    box-shadow: 0 0 15px var(--color-warning);
+}
+
+#paste-button:hover {
+    box-shadow: 0 0 15px var(--color-success);
+}
+
+.upload-label:hover {
+    box-shadow: 0 0 15px var(--color-primary);
+}
+
+/* Botón de Análisis (NEÓN PRINCIPAL) */
+.analysis-action {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+/* Margen ajustado */
+.neon-btn {
+    font-size: 1.3rem;
+    /* Botón de analizar un poco más pequeño */
+    padding: 15px 35px;
+    /* Padding ajustado */
+    background-color: var(--color-primary);
+    /* Vuelve a ser púrpura principal */
+    color: var(--color-bg-dark);
+    box-shadow: 0 0 12px var(--color-primary), 0 0 25px var(--color-primary);
+}
+
+.neon-btn:hover {
+    background-color: white;
+    box-shadow: 0 0 18px white, 0 0 35px white;
+    transform: translateY(-3px);
+}
+
+.status-message {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-top: 15px;
+}
+
+
+/* --- PANEL DERECHO: CHAT TIPO MESSENGER --- */
+#chat-messages {
+    display: flex;
+
+    gap: 10px;
+    overflow-y: auto;
+    padding: 15px;
+    /* Padding ajustado */
+    background-color: rgba(13, 13, 13, 0.8);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    /* Margen ajustado */
+    border: 1px solid #222;
+}
+
+#chat-input-area {
+    padding-top: 8px;
+}
+
+#user-question {
+    padding: 10px 15px;
+    /* Padding ajustado */
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 0.95rem;
+}
+
+.neon-send-btn {
+    width: 40px;
+    /* Más pequeño */
+    height: 40px;
+    /* Más pequeño */
+    font-size: 1.2rem;
+    background-color: var(--color-understated);
+    /* El botón de enviar ahora es del nuevo color */
+    box-shadow: 0 0 8px var(--color-understated);
+}
+
+.neon-send-btn:hover {
+    background-color: white;
+    box-shadow: 0 0 15px white;
+    transform: scale(1.05);
+}
+
+/* Estilo de Mensajes (Messenger/WhatsApp Look con icono) */
+.chat-message {
+    max-width: 90%;
+    /* Mensajes un poco más anchos */
+    padding: 10px 15px;
+    /* Padding ajustado */
+    border-radius: 18px;
+    margin-bottom: 12px;
+    /* Margen ajustado */
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    /* Para el icono */
+    align-items: flex-start;
+    /* Alinea el texto con la parte superior del icono */
+    gap: 8px;
+    /* Espacio entre icono y texto */
+}
+
+.robot{
+    border-radius: 50px;
+    border: purple 2px solid;
+    height: 50px;
+}
+.chat-message p {
+    margin: 0;
+}
+
+/* Quitar márgenes internos del párrafo */
+
+.user-message {
+    background-color: var(--color-understated);
+    /* Nuevo color para mensajes del usuario */
+    color: var(--color-bg-dark);
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.bot-message {
+    display: flex;
+    background-color: rgba(51, 51, 51, 0.9);
+    color: #e0e0e0;
+    margin-right: auto;
+    border-bottom-left-radius: 5px;
+    border: 1px solid var(--color-primary);
+    /* Borde púrpura para el bot */
+    box-shadow: 0 0 5px rgba(211, 0, 255, 0.2);
+    width: 100%;
+}
+
+.bot-icon {
+    font-size: 1.2rem;
+    /* Tamaño del icono */
+    line-height: 1;
+    /* Asegurar que no agregue espacio extra */
+    color: var(--color-primary);
+    /* Color del icono */
+    flex-shrink: 0;
+    /* Evitar que el icono se encoja */
+}
+
+.ia-class-result {
+    color: var(--color-success);
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+}
+
+.ia-confidence-result {
+    color: var(--color-warning);
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255, 140, 0, 0.5);
+}
+
+
+/* --- FOOTER (Mantenido) --- */
+.main-footer {
+    padding: 30px 0;
+    margin-top: 60px;
+    border-top: 1px solid #333;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    background-color: rgba(13, 13, 13, 0.8);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.social-links a {
+    color: var(--color-understated);
+    /* Nuevo color */
+    margin: 0 20px;
+    font-weight: 600;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    text-shadow: 0 0 5px rgba(106, 90, 205, 0.3);
+}
+
+.social-links a:hover {
+    color: var(--color-warning);
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px var(--color-warning);
+}
+
+.project-credit {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Media Queries (Ajustados) */
+@media (max-width: 1000px) {
+
+    /* Reducimos el breakpoint para tablets */
+    .analysis-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .header-bar {
+        padding: 15px 15px;
+    }
+
+    .panel {
+        padding: 20px;
+        min-height: auto;
+    }
+
+    #preview-area {
+        height: 250px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .main-footer {
+        padding: 20px 0;
+        margin-top: 30px;
+    }
+
+    .social-links a {
+        margin: 0 10px;
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .interaction-buttons {
+        flex-wrap: wrap;
+    }
+
+    /* Envuelve los botones en pantallas pequeñas */
+    .interaction-buttons button,
+    .upload-label {
+        flex: none;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .interaction-buttons .upload-label {
+        width: 100%;
+    }
+
+    /* Ajuste extra para el label */
+}
+
+#chat-input-area {
+    display: flex;
+}
+
+#user-question {
+    border: 0;
+    width: 100%;
+
+}

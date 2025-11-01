@@ -1,56 +1,74 @@
-# prototipo_placa.py
+# prototipo_recoleccion.py (Versión 2.0)
+import cv2
+import os
 
-import cv2;
-import os;
+# --- 1. CONFIGURACIÓN ---
+# Define la carpeta raíz de tus datos
+CARPETA_RAIZ = "1_Datos_PC/train"
 
+# Define las categorías. Estas DEBEN coincidir con los nombres de las carpetas
+CATEGORIAS = ["01_placa_madre", "02_tarjeta_grafica", "03_modulo_ram", "04_cpu", "05_fuente_poder"]
+
+# --- 2. FUNCIÓN PRINCIPAL ---
 def main():
-    
-    # Abrir la cámara (0 = cámara por defecto)
-    #0 → primera cámara que encuentra tu PC (por defecto la integrada).
-    #1 → segunda cámara que encuentre (por ejemplo la externa USB).
-    
-    capturar = cv2.VideoCapture(1)
 
+    # --- Selección de Categoría ---
+    print("--- Herramienta de Recolección de Datos 'PC-Lens' ---")
+    print("Por favor, selecciona la categoría de lo que vas a fotografiar:")
+    
+    for i, categoria in enumerate(CATEGORIAS):
+        print(f"  {i+1}) {categoria}")
+    
+    try:
+        opcion = int(input("Escribe el número de la opción: ")) - 1
+        categoria_seleccionada = CATEGORIAS[opcion]
+    except:
+        print("Opción no válida. Saliendo.")
+        return
+
+    # Crear la carpeta de destino si no existe
+    carpeta_destino = os.path.join(CARPETA_RAIZ, categoria_seleccionada)
+    if not os.path.exists(carpeta_destino):
+        os.makedirs(carpeta_destino)
+        print(f"Carpeta '{carpeta_destino}' creada.")
+
+    # Contar cuántos archivos ya hay para no sobrescribir
+    contador = len(os.listdir(carpeta_destino)) + 1
+    print(f"Carpeta seleccionada: {categoria_seleccionada} (empezando en la imagen {contador})")
+
+    # --- Tu código de cámara (casi idéntico) ---
+    capturar = cv2.VideoCapture(1) # 1 = cámara externa, 0 = interna
     if not capturar.isOpened():
         print("No se puede abrir la cámara")
         return
 
-    print("Presiona 's' para tomar una foto, 'q' para salir")
-
-
-    carpeta = "img"
-    if not os.path.exists(carpeta):
-        os.makedirs(carpeta)
-
-    contador = 1
+    print("\n¡Cámara lista! Presiona 's' para tomar la foto, 'q' para salir.")
 
     while True:
-        # Capturar frame
         ret, frame = capturar.read()
         if not ret:
-            print("Error al capturar la imagen")
+            print("Error al capturar")
             break
 
-        # Mostrar la imagen en ventana
+        # Mostrar la imagen
         cv2.imshow("Vista de la cámara", frame)
 
-        # Esperar tecla
         key = cv2.waitKey(1) & 0xFF
 
         if key == ord('s'):
-            # Guardar imagen cuando presionas 's'
-            nombre_archivo = f"{carpeta}/placa_{contador}.jpg"
+            # Guardar la imagen en la carpeta correcta
+            nombre_archivo = f"{carpeta_destino}/img_{contador:04d}.jpg" # 04d = 0001, 0002, etc.
             cv2.imwrite(nombre_archivo, frame)
-            print("Imagen guardada como {nombre_archivo}")
-            contador +=1
+            print(f"¡Foto guardada! -> {nombre_archivo}")
+            contador += 1
 
         elif key == ord('q'):
-            # Salir
             break
 
-    # Liberar cámara y cerrar ventanas
+    # Liberar todo
     capturar.release()
     cv2.destroyAllWindows()
+    print("Saliendo. ¡Buen trabajo!")
 
 if __name__ == "__main__":
     main()

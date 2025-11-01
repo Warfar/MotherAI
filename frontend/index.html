@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotherAI - Bienvenido</title>
+    <link rel="stylesheet" href="index.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@400;700;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-animation"></div>
+
+    <div class="hero-container">
+
+        <div class="stripe"></div>
+
+        <div class="hero-content">
+
+            <div class="hero-text">
+                <p class="tagline"><span id="tagline-text">ASISTENCIA TÉCNICA A TRAVÉS DE IA</span></p>
+
+                <div class="main-titles">
+                    <h1 id="main-title-part1">MOTHER</h1>
+                    <h1 id="main-title-part2" class="title-outside-stripe">AI</h1>
+                </div>
+
+                <h2 id="faded-title" class="faded-text">INTELIGENCIA</h2>
+
+                <p class="sub-description">
+                    Utilizamos redes neuronales entrenadas para identificar componentes de hardware
+                    y diagnosticar posibles fallas. Tu proyecto de soporte técnico comienza aquí.
+                </p>
+
+                <a href="analizador.html" class="cta-button">
+                    INICIAR ANÁLISIS
+                </a>
+            </div>
+
+            <img src="img/hero_componente.png" alt="Componente de PC" class="hero-image">
+
+            <p class="credits">Proyecto creado por Guadalupe</p>
+        </div>
+    </div>
+
+    <script class="module" type="module" src="https://unpkg.com/@splinetool/viewer@1.10.90/build/spline-viewer.js"></script>
+    <spline-viewer url="https://prod.spline.design/k9lYkasKIeKJ1c6N/scene.splinecode"></spline-viewer>
+    
+    
+
+   <script>
+        // Función para envolver cada letra en un span para la animación (SIN CAMBIOS)
+        function wrapLetters(elementId, delayMultiplier = 0.05, startDelay = 0) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            const text = element.textContent;
+            element.textContent = '';
+
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.style.animationDelay = `${startDelay + (index * delayMultiplier)}s`;
+                element.appendChild(span);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animación para "MOTHER" y "AI"
+            wrapLetters('main-title-part1', 0.08, 1.8);
+            wrapLetters('main-title-part2', 0.08, 2.2);
+            wrapLetters('faded-title', 0.05, 2.0);
+
+            // Animación de 'typing' para el tagline
+            const taglineElement = document.getElementById('tagline-text');
+            const fullText = taglineElement.textContent;
+            taglineElement.textContent = '';
+            let charIndex = 0;
+            const typingInterval = setInterval(() => {
+                if (charIndex < fullText.length) {
+                    taglineElement.textContent += fullText[charIndex];
+                    charIndex++;
+                } else {
+                    clearInterval(typingInterval);
+                }
+            }, 50);
+            taglineElement.style.opacity = 1;
+        });
+    </script>
+</body>
+
+</html>

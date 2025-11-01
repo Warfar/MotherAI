@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotherAI - Analizador IA</title>
+    <link rel="stylesheet" href="analizador.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="background-animation"></div>
+
+    <div class="header-bar">
+        <div class="logo-area">
+            <h1 class="main-title">MotherAI - Analizador</h1>
+        </div>
+        <a href="index.html" class="return-button">← VOLVER A INICIO</a>
+    </div>
+
+    <div class="container">
+        <div class="analysis-grid">
+
+            <div class="panel" id="image-input-panel">
+                <div class="panel-header">
+                    <h2>🖼️ Cargar Componente</h2>
+                    <p class="guide-text">
+                        Usa las opciones de abajo. La imagen se previsualizará aquí:
+                    </p>
+                </div>
+
+                <div id="preview-area">
+                    <img id="current-image" src="" alt="Previsualización" style="display:none;">
+                    <video id="webcam-preview" style="display:none;" autoplay></video>
+                    <p id="preview-placeholder">Coloque la imagen aquí</p>
+                </div>
+
+                <div class="interaction-buttons">
+                    <button id="camera-button" class="action-btn" title="Usar Cámara Web">📸 Cámara</button>
+                    <input type="file" id="input-file" accept="image/*" style="display:none;">
+                    <label for="input-file" class="action-btn upload-label" title="Subir archivo desde PC">📂 Subir
+                        Imagen</label>
+                    <button id="paste-button" class="action-btn" title="Pegar desde Portapapeles">📋 Pegar
+                        Imagen</button>
+                </div>
+
+                <div class="analysis-action">
+                    <button id="analizar-button" class="neon-btn">ANALIZAR Y PREDECIR</button>
+                    <p id="image-status" class="status-message" style="color: var(--color-understated);">Esperando
+                        imagen...</p>
+                </div>
+            </div>
+
+            <div class="panel" id="chatbot-panel">
+                <div class="panel-header">
+                    <h2>🤖 Soporte de IA</h2>
+                    <p class="guide-text" style="color:var(--color-primary);">*El cerebro de la IA está listo en el
+                        puerto 8000.</p>
+                </div>
+
+                <div id="chat-messages">
+                    <div>
+                        <img class="robot" src="img/robot.png" alt="">
+                    </div>
+                    <div class="chat-message bot-message">
+                        <p><strong>MotherAI:</strong> ¡Bienvenido!...</p>
+                    </div>
+                </div>
+
+                <div id="chat-input-area">
+                    <input type="text" id="user-question"
+                        placeholder="Escribe tu pregunta (Ej: ¿Qué componentes son compatibles?)">
+                    <button id="send-button" class="neon-send-btn" title="Enviar pregunta">➔</button>
+                </div>
+
+                <div id="ia-data-hidden" style="display:none;">
+                    <span id="predicted-class-hidden">---</span>
+                    <span id="predicted-confidence-hidden">0</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="social-links">
+            <a href="#" target="_blank">Instagram</a> |
+            <a href="#" target="_blank">GitHub</a> |
+            <a href="#" target="_blank">LinkedIn</a>
+        </div>
+        <p class="project-credit">Desarrollado por Guadalupe Alfonso</p>
+    </footer>
+
+    <script src="analizador.js"></script>
+</body>
+
+</html>

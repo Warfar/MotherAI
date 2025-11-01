@@ -1,0 +1,370 @@
+/* --- --- --- --- --- --- --- ---
+   ARCHIVO: style_inicio.css (Diseño V1.1 - COMPOSICIÓN FINAL)
+   --- --- --- --- --- --- --- --- */
+
+/* --- Reseteo y Fuente Base --- */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Animaciones Keyframes (Mantenidas) --- */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulseBorder {
+    0% {
+        box-shadow: 0 0 10px rgba(211, 0, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(211, 0, 255, 0.7);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(211, 0, 255, 0.3);
+    }
+}
+
+@keyframes letterReveal {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+/* --- EFECTO DE FONDO DINÁMICO --- */
+.background-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: backgroundPulse 15s infinite alternate ease-in-out;
+}
+
+@keyframes backgroundPulse {
+    from {
+        filter: brightness(0.95);
+        transform: scale(1.0);
+    }
+
+    to {
+        filter: brightness(1.1);
+        transform: scale(1.05);
+    }
+}
+
+
+/* --- Layout Principal --- */
+.hero-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- La Franja (Posicionada detrás del texto) --- */
+.stripe {
+    width: 20vw;
+    min-width: 250px;
+    height: 120vh;
+    background: linear-gradient(180deg, #d300ff, #8f00ff);
+    box-shadow: 0 0 50px rgba(211, 0, 255, 0.8);
+    position: absolute;
+    left: 0;
+    top: -10vh;
+    clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+    z-index: 10;
+    animation: stripeWiden 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes stripeWiden {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 20vw;
+    }
+}
+
+
+/* --- Contenido Principal (El lienzo) --- */
+.hero-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 10;
+    padding: 10vh 5vw;
+}
+
+/* --- Contenedor del Texto (¡POSICIONAMIENTO CLAVE!) --- */
+.hero-text {
+    text-align: left;
+    z-index: 20;
+    position: absolute;
+    /* Usamos posición absoluta */
+    top: 15vh;
+    /* Ajuste desde arriba */
+    left: 20vw;
+    /* AJUSTE CLAVE: Empieza justo donde termina la franja */
+    padding-left: 5vw;
+    /* Espacio extra para que no se pegue a la franja */
+    max-width: 600px;
+    animation: fadeInSlideUp 1.2s ease-out forwards;
+    animation-delay: 1.5s;
+    opacity: 0;
+}
+
+/* --- Títulos Principales (Contenedor para MOTHER AI) --- */
+.main-titles {
+    position: relative;
+    margin-top: -30px;
+    display: flex;
+    align-items: baseline;
+    margin-left: -5vw;
+    /* Tiramos el bloque hacia la franja para que MOTHER quede encima */
+}
+
+/* --- H1 "MOTHER" (Sobre la franja) --- */
+h1#main-title-part1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: clamp(3rem, 7.5vw, 6rem);
+    font-weight: 900;
+    margin: 0;
+    line-height: 0.9;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    position: relative;
+    z-index: 15;
+    /* Asegura que "MOTHER" esté sobre la franja */
+    white-space: nowrap;
+    /* AJUSTE CLAVE: Le damos un brillo morado para que se note la superposición */
+    color: #fff;
+    mix-blend-mode: screen;
+}
+
+/* --- H1 "AI" (Fuera de la franja) --- */
+h1#main-title-part2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: clamp(3rem, 7.5vw, 6rem);
+    font-weight: 900;
+    margin: 0;
+    line-height: 0.9;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+
+
+/* --- H2 "INTELIGENCIA" (Ahora sí completo y debajo) --- */
+h2#faded-title {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: clamp(4rem, 11.5vw, 8.5rem);
+    font-weight: 900;
+    opacity: 0.08;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    z-index: -1;
+    position: relative;
+    margin-left: 0;
+    /* Aseguramos que se alinee a la izquierda */
+    white-space: nowrap;
+}
+
+/* --- Tagline y Descripción --- */
+.tagline {
+    font-family: 'Montserrat', sans-serif;
+    color: #a0a0a0;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 100px;
+    height: 1.2em;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInSlideUp 0.8s ease-out forwards;
+    animation-delay: 1.5s;
+}
+
+.sub-description {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    color: #c0c0c0;
+    line-height: 1.6;
+    margin-top: 20px;
+    max-width: 450px;
+    margin-left: 0;
+    text-align: left;
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 2.5s;
+    opacity: 0;
+}
+
+/* --- El Botón (Alineado a la Izquierda) --- */
+.cta-button {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #111111;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    margin-top: 30px;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(211, 0, 255, 0.4);
+    transition: all 0.3s ease-in-out, box-shadow 0.8s ease-in-out;
+    animation: pulseBorder 2s infinite ease-in-out, fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 3.5s;
+    opacity: 0;
+}
+
+/* --- Créditos y Imagen (Mantenidos) --- */
+.credits {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: #444;
+    font-size: 0.8rem;
+    z-index: 100;
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 3.8s;
+    opacity: 0;
+}
+
+.hero-image {
+    width: 60%;
+    max-width: 700px;
+    object-fit: contain;
+    position: absolute;
+    bottom: -15vh;
+    right: 0vw;
+    transform: none;
+    filter: drop-shadow(0 25px 80px rgba(0, 195, 255, 0.4));
+    z-index: 5;
+    animation: fadeInSlideFromBottom 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation-delay: 1.2s;
+    opacity: 0;
+}
+
+@keyframes fadeInSlideFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* --- Media Queries (Mantenidos) --- */
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .stripe {
+        width: 100%;
+        height: 10vh;
+        top: 0;
+        clip-path: none;
+        animation-delay: 0s;
+    }
+
+    .hero-text {
+        left: 0;
+        margin-left: 0;
+        top: 20vh;
+        text-align: center;
+        max-width: 90%;
+        animation-delay: 1s;
+        padding-left: 0;
+    }
+
+    .main-titles {
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    h1#main-title-part1,
+    h1#main-title-part2 {
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+    .hero-image {
+        width: 95%;
+        position: relative;
+        bottom: auto;
+        right: auto;
+        transform: none;
+        margin-top: 30px;
+        animation-delay: 0.5s;
+    }
+
+    .credits {
+        position: relative;
+        text-align: center;
+        margin-top: 30px;
+        animation-delay: 2.5s;
+    }
+
+    .sub-description {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+}
